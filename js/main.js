@@ -24,7 +24,8 @@ const MESSAGES_COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 let commentId = 1;
-let postsId = 1;
+let postId = 1;
+let postIndex = 1;
 
 // Получение уникального Id в заданном диапазоне.
 const getRandomId = (min, max) => {
@@ -34,16 +35,18 @@ const getRandomId = (min, max) => {
   return Math.floor(result);
 };
 
+// const getRandomId = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 // Поиск случайного элемента в переданном массиве.
 const getRandomArrayElement = (array) => array[getRandomId(0, array.length - 1)];
 
 // Создание объекта
-const createPosts = () => ({
-  id: postsId++,
-  url: `photos/${postsId++}.jpg`,
+const createPost = () => ({
+  id: postId++,
+  url: `photos/${postIndex++}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomId(15, 200),
-  comments: Array.from({ length: getRandomId(0, 20) }, createComments),
+  comments: Array.from({ length: getRandomId(0, 30) }, createComments),
 });
 
 const createComments = () => ({
@@ -53,6 +56,6 @@ const createComments = () => ({
   name: getRandomArrayElement(NAMES_COMMENTS),
 });
 
-const createPost = () => Array.from({ length: POSTS_COUNT }, createPosts);
+const createPosts = () => Array.from({ length: POSTS_COUNT }, createPost);
 
-console.log(createPost());
+console.log(createPosts());

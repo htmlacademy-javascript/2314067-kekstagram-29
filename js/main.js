@@ -34,26 +34,25 @@ const getRandomId = (min, max) => {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-
 // const getRandomId = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 // Поиск случайного элемента в переданном массиве.
 const getRandomArrayElement = (array) => array[getRandomId(0, array.length - 1)];
 
 // Создание объекта
+const createComments = () => ({
+  id: commentId++,
+  avatar: `img/avatar-${getRandomId(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGES_COMMENTS),
+  name: getRandomArrayElement(NAMES_COMMENTS),
+});
+
 const createPost = () => ({
   id: postId++,
   url: `photos/${postIndex++}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomId(15, 200),
   comments: Array.from({ length: getRandomId(0, 30) }, createComments),
-});
-
-const createComments = () => ({
-  id: commentId++,
-  avatar: `img/avatar-${getRandomId(1, 6)}.svg`,
-  message: getRandomArrayElement(MESSAGES_COMMENTS),
-  name: getRandomArrayElement(NAMES_COMMENTS),
 });
 
 const createPosts = () => Array.from({ length: POSTS_COUNT }, createPost);

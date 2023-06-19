@@ -1,3 +1,3 @@
-import {createPosts} from './data.js';
+import {renderPosts} from './gallery.js';
 
-console.log(createPosts());
+console.log(renderPosts());

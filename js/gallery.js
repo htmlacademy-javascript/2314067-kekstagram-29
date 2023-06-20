@@ -1,9 +1,11 @@
-import {createPosts} from './data.js';
+import { createPosts } from './data.js';
 
-const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');
+// Отображение фотографий
 const galleryList = document.querySelector('.pictures');
-const galleryData = createPosts();
+const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
+// Отрисовка фотографий в миниатюре
+const galleryData = createPosts();
 const createPost = (dataPictures) => {
   const postElement = galleryTemplate.cloneNode(true);
   postElement.querySelector('.picture__img').src = dataPictures.url;
@@ -17,4 +19,4 @@ const renderPosts = () => {
   galleryData.forEach((item) => galleryList.append(createPost(item)));
 };
 
-export {renderPosts};
+export { renderPosts };

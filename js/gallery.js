@@ -8,15 +8,14 @@ const galleryTemplate = document.querySelector('#picture').content.querySelector
 // const renderPosts = (dataPictures) => {
 //   const listFragment = document.createDocumentFragment();
 
-//   dataPictures.forEach(({ url, description, likes, comments, id }) => {
-//     const templateElement = galleryTemplate.cloneNode(true);
-//     templateElement.querySelector('.picture__img').src = url;
-//     templateElement.querySelector('.picture__img').alt = description;
-//     templateElement.querySelector('.picture__likes').textContent = likes;
-//     templateElement.querySelector('.picture__comments').textContent = comments.length;
-//     templateElement.dataset.thumbnailId = id;
+//   dataPictures.forEach(({ url, description, likes, comments }) => {
+//     const postElement = galleryTemplate.cloneNode(true);
+//     postElement.querySelector('.picture__img').src = url;
+//     postElement.querySelector('.picture__img').alt = description;
+//     postElement.querySelector('.picture__likes').textContent = likes;
+//     postElement.querySelector('.picture__comments').textContent = comments.length;
 
-//     listFragment.append(templateElement);
+//     listFragment.append(postElement);
 //   });
 
 //   galleryList.append(listFragment);

@@ -1,7 +1,7 @@
 import {getRandomArrayElement, getRandomId} from './util.js';
 
 const POSTS_COUNT = 25;
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Делайте в вашей жизни то, что меньше заставляет вас смотреть в свой телефон.',
   'Жизнь похожа на фотокамеру: вам просто нужно смотреть на нее с улыбкой.',
   'Не ждите идеального момента. Берите каждый момент и делайте его идеальным.',
@@ -25,26 +25,30 @@ const MESSAGES_COMMENTS = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-let commentId = 1;
+let commentsId = 1;
 let postId = 1;
-let postIndex = 1;
 
 // Создание объекта
+const createMessage = () => {
+  const message = Array.from({length: getRandomId(1, 2)}, () => getRandomArrayElement(MESSAGES_COMMENTS));
+  return [...new Set(message)].join (' ');
+};
+
 const createComments = () => ({
-  id: commentId++,
+  id: commentsId++,
   avatar: `img/avatar-${getRandomId(1, 6)}.svg`,
-  message: getRandomArrayElement(MESSAGES_COMMENTS),
+  message: createMessage(),
   name: getRandomArrayElement(NAMES_COMMENTS),
 });
 
 const createPost = () => ({
-  id: postId++,
-  url: `photos/${postIndex++}.jpg`,
-  description: getRandomArrayElement(DESCRIPTION),
+  id: postId,
+  url: `photos/${postId++}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomId(15, 200),
-  comments: Array.from({ length: getRandomId(0, 30) }, createComments),
+  comments: Array.from({length: getRandomId(0, 30)}, createComments),
 });
 
-const createPosts = () => Array.from({ length: POSTS_COUNT }, createPost);
+const createPosts = () => Array.from({length: POSTS_COUNT}, createPost);
 
 export {createPosts};

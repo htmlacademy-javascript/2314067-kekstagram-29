@@ -5,10 +5,10 @@ const bigPictureClose = document.querySelector('.big-picture__cancel');
 const bigPictureImg = document.querySelector('.big-picture__img img');
 const modalLikesCounter = document.querySelector('.likes-count');
 const modalCommentsCounter = document.querySelector('.social__comment-count');
-const commentsList = document.querySelector('.social__comments');
-const socialCaption = document.querySelector('.social__caption'); /*bigPictureCaption*/
-const commentsLoader = document.querySelector('.comments-loader'); /*bigPictureLoadButton*/
-const commentList = document.querySelector('.social__comment'); /*commentTemplate*/
+const modalCommentsList = document.querySelector('.social__comments');
+const modalCaption = document.querySelector('.social__caption');
+const modalCommentsLoader = document.querySelector('.comments-loader');
+const commentList = document.querySelector('.social__comment');
 const COMMENTS_COUNTER = 5;
 
 let showingComments = 0;
@@ -43,22 +43,20 @@ const renderComments = () => {
   const currentComments = comments.slice(showingComments, showingComments + COMMENTS_COUNTER);
   showingComments += COMMENTS_COUNTER;
   showingComments = Math.min(showingComments, comments.length);
-  currentComments.forEach((item) => commentsList.append(createComment(item)));
+  currentComments.forEach((item) => modalCommentsList.append(createComment(item)));
   fillCommentCounter();
 
   if (showingComments >= comments.length) {
-    commentsLoader.classList.add('hidden');
+    modalCommentsLoader.classList.add('hidden');
     return;
   }
-  commentsLoader.classList.remove('hidden');
+  modalCommentsLoader.classList.remove('hidden');
 };
 
-// Функция отображения контента внутри модального окна
 const modalPicture = (dataPost) => {
   bigPictureImg.src = dataPost.url;
-  bigPictureImg.textContent = dataPost.likes;
-  bigPictureImg.textContent = dataPost.description;
-  bigPicture.querySelector('.social__comment-count .comments-count').textContent = dataPost.comments.length;
+  modalLikesCounter.textContent = dataPost.likes;
+  modalCaption.textContent = dataPost.description;
 };
 
 // Функция закрытия модального окна
@@ -80,14 +78,14 @@ const commentsLoadClick = (evt) => {
 // Функция открытия модального окна
 const openModal = (dataPost) => {
   comments = dataPost.comments;
-  commentsList.innerHTML = '';
+  modalCommentsList.innerHTML = '';
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
   modalPicture(dataPost);
   renderComments();
   document.addEventListener('keydown', modalEscKeydown);
   bigPictureClose.addEventListener('click', buttonModalCloseClick);
-  commentsLoader.addEventListener('click', commentsLoadClick);
+  modalCommentsLoader.addEventListener('click', commentsLoadClick);
 };
 
 export { openModal };

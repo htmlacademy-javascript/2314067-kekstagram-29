@@ -17,7 +17,7 @@ let comments = [];
 const modalEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    closeModal();
+    closModal();
   }
 };
 

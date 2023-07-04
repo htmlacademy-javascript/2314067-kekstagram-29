@@ -1,5 +1,5 @@
 import { createPosts } from './data.js';
-import { openModal } from './modal.js';
+import { renderModal } from './modal.js';
 
 // Отображение фотографий
 const galleryList = document.querySelector('.pictures');
@@ -18,8 +18,9 @@ const createPost = (dataPictures) => {
   galleryFragment.append(postElement);
 
   // Вешает обработчик - по клику открывает пост
-  postElement.addEventListener('click', () => {
-    openModal(dataPictures);
+  postElement.addEventListener('click', (event) => {
+    event.preventDefault();
+    renderModal(dataPictures);
   });
   return postElement;
 };

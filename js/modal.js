@@ -14,18 +14,6 @@ const COMMENTS_COUNTER = 5;
 let showingComments = 0;
 let comments = [];
 
-const modalEscKeydown = (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    closeModal();
-  }
-};
-
-const buttonModalCloseClick = (evt) => {
-  evt.preventDefault();
-  closeModal();
-};
-
 const fillCommentCounter = () => {
   modalCommentsCounter.innerHTML = `${showingComments} из <span class="comments-count"> ${comments.length}</span> комментариев`;
 };
@@ -34,7 +22,7 @@ const createComment = (comment) => {
   const newComment = commentList.cloneNode(true);
   const img = newComment.querySelector('img');
   img.src = comment.avatar;
-  img.alt = comment.message;
+  img.alt = comment.name;
   newComment.querySelector('p').textContent = comment.message;
   return newComment;
 };
@@ -63,7 +51,7 @@ const modalPicture = (dataPost) => {
 const closeModal = () => {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
-  document.addEventListener('keydown', modalEscKeydown);
+  document.removeEventListener('keydown', modalEscKeydown);
   bigPictureClose.removeEventListener('click', buttonModalCloseClick);
 
   comments = [];
@@ -75,17 +63,33 @@ const commentsLoadClick = (evt) => {
   renderComments();
 };
 
-// Функция открытия модального окна
-const openModal = (dataPost) => {
-  comments = dataPost.comments;
-  modalCommentsList.innerHTML = '';
+function modalEscKeydown(event) {
+  if (event.key === 'Escape' && !event.target.closest('.social__footer-text')) {
+    event.preventDefault();
+    closeModal();
+  }
+}
+
+function buttonModalCloseClick(event) {
+  event.preventDefault();
+  closeModal();
+}
+
+const openModal = () => {
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
-  modalPicture(dataPost);
-  renderComments();
   document.addEventListener('keydown', modalEscKeydown);
   bigPictureClose.addEventListener('click', buttonModalCloseClick);
   modalCommentsLoader.addEventListener('click', commentsLoadClick);
 };
 
-export { openModal };
+// Функция открытия модального окна
+const renderModal = (dataPost) => {
+  comments = dataPost.comments;
+  modalCommentsList.innerHTML = '';
+  openModal();
+  modalPicture(dataPost);
+  renderComments();
+};
+
+export { renderModal };

@@ -1,3 +1,5 @@
+import { isEscapeKey } from './util.js';
+
 const COMMENTS_COUNTER = 5;
 
 const bigPicture = document.querySelector('.big-picture');
@@ -19,10 +21,10 @@ const fillCommentDescription = () => {
 
 const createComment = (comment) => {
   const newComment = commentList.cloneNode(true);
-  const img = newComment.querySelector('img');
+  const img = newComment.querySelector('.social__picture');
   img.src = comment.avatar;
   img.alt = comment.name;
-  newComment.querySelector('p').textContent = comment.message;
+  newComment.querySelector('.social__text').textContent = comment.message;
   return newComment;
 };
 
@@ -62,7 +64,7 @@ const commentsLoadClickHandler = (event) => {
 };
 
 function modalEscKeydownHandler(event) {
-  if (event.key === 'Escape' && !event.target.closest('.social__footer-text')) {
+  if (isEscapeKey(event) && !event.target.closest('.social__footer-text')) {
     event.preventDefault();
     closeModal();
   }

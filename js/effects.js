@@ -4,43 +4,52 @@ const RANGE_OPTIONS = {
     min: 0,
     max: 1,
     step: 0.1,
+    unit: '',
   },
   sepia: {
     effect: 'sepia',
     min: 0,
     max: 1,
     step: 0.1,
+    unit: '',
   },
   marvin: {
     effect: 'invert',
     min: 0,
     max: 100,
     step: 1,
+    unit: '%',
   },
   phobos: {
     effect: 'blur',
     min: 0,
     max: 3,
     step: 0.1,
+    unit: 'px',
   },
   heat: {
     effect: 'brightness',
     min: 1,
     max: 3,
     step: 0.1,
+    unit: '',
   },
-};
-
-const UNIT = {
-  invert: '%',
-  blur: 'px',
 };
 
 const imageElement = document.querySelector('.img-upload__preview img');
 const sliderField = document.querySelector('.img-upload__effect-level');
 const effectLevel = document.querySelector('.effect-level__value');
 
-const createSlider = () => {
+const setSliderState = (value) => {
+  if (value === 'none') {
+    sliderField.classList.add('hidden');
+    return;
+  }
+  sliderField.classList.add('hidden');
+};
+
+const createSlider = (value) => {
+  setSliderState(value);
   noUiSlider.create(sliderField, {
     range: {
       min: 0,
@@ -52,21 +61,24 @@ const createSlider = () => {
   });
 };
 
-const resetFilter = () => {
+const resetFilter = (value) => {
   imageElement.style.filter = null;
+  setSliderState(value);
   sliderField.classList.add('hidden');
 };
 
-const changeEffect = ({target}) => {
+const changeEffect = ({ target }) => {
   if (target.value === 'none') {
     resetFilter();
+    setSliderState(target.value);
     return;
   }
 
+  setSliderState(target.value);
+
   sliderField.classList.remove('hidden');
 
-  const {effect, min, max, step} = RANGE_OPTIONS[target.value];
-  const unit = UNIT[effect] ? UNIT[effect] : '';
+  const { effect, min, max, step, unit } = RANGE_OPTIONS[target.value];
 
   sliderField.noUiSlider.updateOptions({
     range: {
@@ -84,4 +96,4 @@ const changeEffect = ({target}) => {
   });
 };
 
-export {changeEffect, resetFilter, createSlider};
+export { changeEffect, resetFilter, createSlider };

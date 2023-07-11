@@ -1,9 +1,5 @@
-import { createPosts } from './data-post.js';
+import { createPosts } from './data.js';
 import { renderModal } from './modal.js';
-// import { getData } from './data.js';
-
-// const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
-// const ERROR_TIMEOUT = 5000;
 
 const galleryList = document.querySelector('.pictures');
 const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');

@@ -2,12 +2,23 @@ import { isEscapeKey } from './util.js';
 import { changeEffect, resetFilter, createSlider } from './effects.js';
 import { addValidator, resetPristine, validatePristine } from './validate.js';
 import { activateScale, resetScale } from './scaling.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
+import { sendData } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const buttonCancel = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
+
+const onSendSuccessMessage = () => {
+  showSuccessMessage();
+  closeForm();
+};
+
+const onSendErrorMessage = () => {
+  showErrorMessage();
+};
 
 const onDocumentKeydown = (event) => {
   if (isEscapeKey(event) && !event.target.closest('.text__hashtags') &&
@@ -28,8 +39,9 @@ const onFileInputChange = () => openForm();
 const onEffectsChange = (event) => changeEffect(event);
 
 const onFormSubmit = (event) => {
-  if (!validatePristine()) {
-    event.preventDefault();
+  event.preventDefault();
+  if (validatePristine()) {
+    sendData(sendData, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
   }
 };
 

@@ -34,6 +34,11 @@ const RANGE_OPTIONS = {
     step: 0.1,
     unit: '',
   },
+  default: {
+    min: 0,
+    max: 100,
+    step: 1,
+  }
 };
 
 const imageElement = document.querySelector('.img-upload__preview img');
@@ -45,18 +50,19 @@ const setSliderState = (value) => {
     sliderField.classList.add('hidden');
     return;
   }
-  sliderField.classList.add('hidden');
+  sliderField.classList.remove('hidden');
 };
 
 const createSlider = (value) => {
   setSliderState(value);
+  const settings = RANGE_OPTIONS[value] || RANGE_OPTIONS.default;
   noUiSlider.create(sliderField, {
     range: {
-      min: 0,
-      max: 100,
+      min: settings.min,
+      max: settings.max,
     },
-    start: 100,
-    step: 1,
+    start: settings.max,
+    step: settings.step,
     connect: 'lower',
   });
 };
@@ -82,11 +88,11 @@ const changeEffect = ({ target }) => {
 
   sliderField.noUiSlider.updateOptions({
     range: {
-      min,
-      max,
+      min: min,
+      max: max,
     },
     start: max,
-    step,
+    step: step,
     connect: 'lower',
   });
 

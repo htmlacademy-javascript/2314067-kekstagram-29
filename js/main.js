@@ -1,6 +1,7 @@
 import { renderPosts } from './render-posts.js';
-import { addForm } from './form.js';
+import { setFormAction } from './form.js';
+// import { getData } from './api.js';
 
 
 renderPosts();
-addForm();
+setFormAction();

@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomId} from './util.js';
+import { getRandomArrayElement, getRandomId } from './util.js';
 
 const POSTS_COUNT = 25;
 const DESCRIPTIONS = [
@@ -28,10 +28,9 @@ const MESSAGES_COMMENTS = [
 let commentsId = 1;
 let postId = 1;
 
-// Создание объекта
 const createMessage = () => {
-  const message = Array.from({length: getRandomId(1, 2)}, () => getRandomArrayElement(MESSAGES_COMMENTS));
-  return [...new Set(message)].join (' ');
+  const message = Array.from({ length: getRandomId(1, 2) }, () => getRandomArrayElement(MESSAGES_COMMENTS));
+  return [...new Set(message)].join(' ');
 };
 
 const createComments = () => ({
@@ -46,9 +45,9 @@ const createPost = () => ({
   url: `photos/${postId++}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomId(15, 200),
-  comments: Array.from({length: getRandomId(0, 30)}, createComments),
+  comments: Array.from({ length: getRandomId(0, 30) }, createComments),
 });
 
-const createPosts = () => Array.from({length: POSTS_COUNT}, createPost);
+const createPosts = () => Array.from({ length: POSTS_COUNT }, createPost);
 
-export {createPosts};
+export { createPosts };

@@ -1,5 +1,6 @@
 import { createPosts } from './data.js';
 import { renderModal } from './modal.js';
+// import { getData } from './api.js';
 
 const galleryList = document.querySelector('.pictures');
 const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');

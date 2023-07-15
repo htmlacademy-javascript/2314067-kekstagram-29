@@ -2,9 +2,10 @@ import { isEscapeKey } from './util.js';
 import { changeEffect, resetFilter, createSlider } from './effects.js';
 import { addValidator, resetPristine, validatePristine } from './validate.js';
 import { activateScale, resetScale } from './scaling.js';
-import { showSuccessMessage, showErrorMessage } from './message.js';
 import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 
+const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const buttonCancel = document.querySelector('#upload-cancel');
@@ -41,7 +42,7 @@ const onEffectsChange = (event) => changeEffect(event);
 const onFormSubmit = (event) => {
   event.preventDefault();
   if (validatePristine()) {
-    sendData(sendData, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
+    sendData(GET_URL, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
   }
 };
 

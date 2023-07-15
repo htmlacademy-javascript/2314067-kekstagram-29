@@ -1,10 +1,11 @@
-import { createPosts } from './data.js';
+import { showErrorMessage } from './util.js';
 import { renderModal } from './modal.js';
+import { getData } from './api.js';
 
+const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
 const galleryList = document.querySelector('.pictures');
 const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const galleryFragment = document.createDocumentFragment();
-const galleryData = createPosts();
 
 const createPost = (dataPictures) => {
   const postElement = galleryTemplate.cloneNode(true);
@@ -22,9 +23,12 @@ const createPost = (dataPictures) => {
   return postElement;
 };
 
-const renderPosts = () => {
-  galleryData.forEach((item) => createPost(item));
-  galleryList.append(galleryFragment);
+const renderPosts = (dataPictures) => {
+  dataPictures.forEach((item) => galleryList.append(createPost(item)));
 };
 
-export { renderPosts };
+const getSuccess = (dataPictures) => renderPosts(dataPictures);
+
+const getRenderPostsData = () => getData(GET_URL, getSuccess, showErrorMessage);
+
+export { getRenderPostsData };

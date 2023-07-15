@@ -1,5 +1,5 @@
 const STEP_SCALE = 25;
-const END_SCALE = 100;
+const PERCENT_DIVIDER = 100;
 const MIN_SCALE = '25%';
 const MAX_SCALE = '100%';
 
@@ -10,17 +10,17 @@ const scaleInput = document.querySelector('.scale__control--value');
 
 
 const changeScale = (value) => {
-  previewImage.style.transform = `scale(${+value.replace('%', '') / END_SCALE})`;
+  previewImage.style.transform = `scale(${+value.replace('%', '') / PERCENT_DIVIDER})`;
 };
 
-const onSmallerButtonclick = () => {
+const onSmallerButtonClick = () => {
   if (scaleInput.value !== MIN_SCALE) {
     scaleInput.value = `${+scaleInput.value.replace('%', '') - STEP_SCALE}%`;
     changeScale(scaleInput.value);
   }
 };
 
-const onBiggerButtonclick = () => {
+const onBiggerButtonClick = () => {
   if (scaleInput.value !== MAX_SCALE) {
     scaleInput.value = `${+scaleInput.value.replace('%', '') + STEP_SCALE}%`;
     changeScale(scaleInput.value);
@@ -28,8 +28,8 @@ const onBiggerButtonclick = () => {
 };
 
 const activateScale = () => {
-  scaleUpButton.addEventListener('click', onBiggerButtonclick);
-  scaleDownButton.addEventListener('click', onSmallerButtonclick);
+  scaleUpButton.addEventListener('click', onBiggerButtonClick);
+  scaleDownButton.addEventListener('click', onSmallerButtonClick);
 };
 
 const resetScale = () => changeScale(scaleInput.value);

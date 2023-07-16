@@ -27,7 +27,9 @@ const renderPosts = (dataPictures) => {
   dataPictures.forEach((item) => galleryList.append(createPost(item)));
 };
 
-const getSuccess = (dataPictures) => renderPosts(dataPictures);
+const getSuccess = (dataPictures) => {
+  renderPosts(dataPictures);
+};
 
 const getRenderPostsData = () => getData(GET_URL, getSuccess, showErrorMessage);
 

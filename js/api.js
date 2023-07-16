@@ -1,8 +1,8 @@
 const getData = (url, onSuccess, onError) => {
   fetch(url)
     .then((response) => response.json())
-    .then((data) => {
-      onSuccess(data);
+    .then((dataPictures) => {
+      onSuccess(dataPictures);
     })
     .catch((error) => {
       onError(error);

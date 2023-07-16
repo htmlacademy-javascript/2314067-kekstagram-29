@@ -8,13 +8,11 @@ let successMessageClone;
 const closeErrorMessage = () => {
   errorMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  errorMessageClone = '';
 };
 
 const closeSuccessMessage = () => {
   successMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  successMessageClone = '';
 };
 
 function onDocumentKeydown(event) {

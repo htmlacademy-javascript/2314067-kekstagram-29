@@ -5,7 +5,7 @@ import { activateScale, resetScale } from './scaling.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 
-const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
+const GET_URL = 'https://29.javascript.pages.academy/kekstagram';
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const buttonCancel = document.querySelector('#upload-cancel');

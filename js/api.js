@@ -1,11 +1,11 @@
 const getData = (url, onSuccess, onError) => {
   fetch(url)
     .then((response) => response.json())
-    .then((dataPictures) => {
-      onSuccess(dataPictures);
+    .then((result) => {
+      onSuccess(result);
     })
-    .catch((error) => {
-      onError(error);
+    .catch(() => {
+      onError();
     });
 };
 

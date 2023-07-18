@@ -1,8 +1,8 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from '../utils/util.js';
 import { changeEffect, resetFilter, createSlider } from './effects.js';
 import { addValidator, resetPristine, validatePristine } from './validate.js';
 import { activateScale, resetScale } from './scaling.js';
-import { sendData } from './api.js';
+import { sendData } from '../utils/api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 
 const SEND_URL = 'https://29.javascript.pages.academy/kekstagram';

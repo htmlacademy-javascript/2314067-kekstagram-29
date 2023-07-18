@@ -1,8 +1,8 @@
 const getData = (url, onSuccess, onError) => {
   fetch(url)
     .then((response) => response.json())
-    .then((result) => {
-      onSuccess(result);
+    .then((data) => {
+      onSuccess(data);
     })
     .catch(() => {
       onError();

@@ -1,9 +1,5 @@
-import { showErrorMessage } from '../utils/util.js';
 import { renderModal } from './modal.js';
-import { getData } from '../utils/api.js';
 
-const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
-const galleryList = document.querySelector('.pictures');
 const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const galleryFragment = document.createDocumentFragment();
 
@@ -23,14 +19,4 @@ const createPost = (data) => {
   return postElement;
 };
 
-const renderPosts = (data) => {
-  data.forEach((item) => galleryList.append(createPost(item)));
-};
-
-const getSuccess = (data) => {
-  renderPosts(data);
-};
-
-const getRenderPostsData = () => getData(GET_URL, getSuccess, showErrorMessage);
-
-export { getRenderPostsData };
+export { createPost };

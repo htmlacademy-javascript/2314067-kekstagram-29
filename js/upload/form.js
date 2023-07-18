@@ -64,7 +64,7 @@ function closeForm() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-const setFormAction = () => {
+const initFormAction = () => {
   fileField.addEventListener('change', onFileInputChange);
   buttonCancel.addEventListener('click', onButtonCancelClick);
   effectsField.addEventListener('change', onEffectsChange);
@@ -74,4 +74,4 @@ const setFormAction = () => {
   activateScale();
 };
 
-export { setFormAction };
+export { initFormAction };

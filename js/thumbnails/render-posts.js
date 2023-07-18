@@ -1,6 +1,7 @@
 import { showErrorMessage } from '../utils/util.js';
 import { renderModal } from './modal.js';
 import { getData } from '../utils/api.js';
+import {initFilter} from './filters.js';
 
 const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
 const galleryList = document.querySelector('.pictures');
@@ -29,8 +30,9 @@ const renderPosts = (data) => {
 
 const getSuccess = (data) => {
   renderPosts(data);
+  initFilter(data);
 };
 
 const getRenderPostsData = () => getData(GET_URL, getSuccess, showErrorMessage);
 
-export { getRenderPostsData };
+export { getRenderPostsData, renderPosts };

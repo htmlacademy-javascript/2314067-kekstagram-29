@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from '../utils/util.js';
 
 const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -8,13 +8,11 @@ let successMessageClone;
 const closeErrorMessage = () => {
   errorMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  errorMessageClone = '';
 };
 
 const closeSuccessMessage = () => {
   successMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
-  successMessageClone = '';
 };
 
 function onDocumentKeydown(event) {

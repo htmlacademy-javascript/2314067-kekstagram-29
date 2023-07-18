@@ -1408,3 +1408,18 @@ main {
 .hidden {
   display: none;
 }
+
+.show-error-message {
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 10px 3px;
+  line-height: normal;
+  opacity: 0.8;
+  font-size: 30px;
+  text-align: center;
+  background-color: #e90000;
+  color: #000000;
+}

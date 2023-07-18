@@ -96,6 +96,8 @@ const changeEffect = ({ target }) => {
     connect: 'lower',
   });
 
+  sliderField.noUiSlider.off('update');
+
   sliderField.noUiSlider.on('update', () => {
     effectLevel.value = sliderField.noUiSlider.get();
     imageElement.style.filter = `${effect}(${effectLevel.value}${unit})`;

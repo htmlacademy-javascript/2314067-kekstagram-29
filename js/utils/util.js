@@ -1,20 +1,10 @@
 const ALERT_SHOW_TIME = 5000;
+const ERROR_MESSAGE = 'Ошибка загрузки. Попробовать ещё раз.';
 
-const showErrorMessage = (message) => {
+const showErrorMessage = () => {
   const errorContainer = document.createElement('div');
   errorContainer.classList.add('show-error-message');
-  errorContainer.style.zIndex = '100';
-  errorContainer.style.position = 'absolute';
-  errorContainer.style.left = '0';
-  errorContainer.style.top = '0';
-  errorContainer.style.right = '0';
-  errorContainer.style.padding = '10px 3px';
-  errorContainer.style.lineHeight = 'normal';
-  errorContainer.style.opacity = '0.8';
-  errorContainer.style.fontSize = '30px';
-  errorContainer.style.textAlign = 'center';
-  errorContainer.style.backgroundColor = 'red';
-  errorContainer.textContent = message;
+  errorContainer.textContent = ERROR_MESSAGE;
   document.body.append(errorContainer);
 
   setTimeout(() => {

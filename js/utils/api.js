@@ -4,8 +4,8 @@ const getData = (url, onSuccess, onError) => {
     .then((data) => {
       onSuccess(data);
     })
-    .catch((error) => {
-      onError(error);
+    .catch(() => {
+      onError();
     });
 };
 

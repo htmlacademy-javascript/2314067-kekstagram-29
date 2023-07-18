@@ -1,24 +1,31 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey } from '../utils/util.js';
 import { changeEffect, resetFilter, createSlider } from './effects.js';
 import { addValidator, resetPristine, validatePristine } from './validate.js';
 import { activateScale, resetScale } from './scaling.js';
-import { sendData } from './api.js';
+import { sendData } from '../utils/api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 
-const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
+const SEND_URL = 'https://29.javascript.pages.academy/kekstagram';
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const buttonCancel = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
+const imagesUploadSubmit = document.querySelector('.img-upload__submit');
+
+function setImagesUploadSubmit(state) {
+  imagesUploadSubmit.disabled = state;
+}
 
 const onSendSuccessMessage = () => {
   showSuccessMessage();
   closeForm();
+  setImagesUploadSubmit(false);
 };
 
 const onSendErrorMessage = () => {
   showErrorMessage();
+  setImagesUploadSubmit(false);
 };
 
 const onDocumentKeydown = (event) => {
@@ -42,7 +49,8 @@ const onEffectsChange = (event) => changeEffect(event);
 const onFormSubmit = (event) => {
   event.preventDefault();
   if (validatePristine()) {
-    sendData(GET_URL, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
+    setImagesUploadSubmit(true);
+    sendData(SEND_URL, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
   }
 };
 

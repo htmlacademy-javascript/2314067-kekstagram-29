@@ -1,15 +1,21 @@
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+import { fileField } from './form.js';
+import { previewImage } from './scaling.js';
 
-const imagesUploadInput = document.querySelector('.img-upload__input');
-const preview = document.querySelector('.img-upload__preview img');
+const FILE_TYPES = ['jpeg', 'png', 'jpg', 'heic', 'webp'];
+
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 const loadImages = () => {
-  const file = imagesUploadInput.files[0];
+  const file = fileField.files[0];
   const fileName = file.name.toLowerCase();
+
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
-    preview.src = URL.createObjectURL(file);
+    previewImage.src = URL.createObjectURL(file);
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
   }
 };
 

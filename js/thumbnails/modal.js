@@ -16,7 +16,7 @@ let showingComments = 0;
 let comments = [];
 
 const fillCommentDescription = () => {
-  modalCommentsCounter.innerHTML = `${showingComments} из <span class="comments-count"> ${comments.length}</span> комментариев`;
+  modalCommentsCounter.innerHTML = `${showingComments} из <span class="comments-count">${comments.length}</span> комментариев`;
 };
 
 const createComment = (comment) => {
@@ -44,10 +44,10 @@ const renderComments = () => {
   setButtonState();
 };
 
-const fillPicture = (dataPost) => {
-  bigPictureImg.src = dataPost.url;
-  modalLikesCounter.textContent = dataPost.likes;
-  modalCaption.textContent = dataPost.description;
+const fillPicture = (post) => {
+  bigPictureImg.src = post.url;
+  modalLikesCounter.textContent = post.likes;
+  modalCaption.textContent = post.description;
 };
 
 const closeModal = () => {
@@ -83,11 +83,11 @@ const openModal = () => {
   modalCommentsLoader.addEventListener('click', commentsLoadClickHandler);
 };
 
-const renderModal = (dataPost) => {
-  comments = dataPost.comments;
+const renderModal = (post) => {
+  comments = post.comments;
   modalCommentsList.innerHTML = '';
   openModal();
-  fillPicture(dataPost);
+  fillPicture(post);
   renderComments();
 };
 

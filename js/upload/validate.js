@@ -4,6 +4,7 @@ const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = 'Хэштег начинается с символа "#"(решётка), содержать буквы и цифры (не более 20 символов, включая #)';
 const UNIQUE_HASHTAGS = 'Один и тот же хэш-тег не может быть использован дважды';
 const VALID_COUNT = 'Нельзя указать больше пяти хэш-тегов';
+const VALID_COMMENT_TEXT = 'Длина комментария не может составлять больше 140 символов';
 
 const form = document.querySelector('.img-upload__form');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -62,7 +63,9 @@ const addValidator = () => {
   pristine.addValidator(
     descriptionField,
     isValidComment,
-    'Длина комментария не может составлять больше 140 символов',
+    VALID_COMMENT_TEXT,
+    1,
+    true
   );
 };
 

@@ -34,4 +34,4 @@ const activateScale = () => {
 
 const resetScale = () => changeScale(scaleInput.value);
 
-export { activateScale, resetScale };
+export { activateScale, resetScale, previewImage };

@@ -80,4 +80,4 @@ const initFormAction = () => {
   activateScale();
 };
 
-export { initFormAction };
+export { initFormAction, fileField };

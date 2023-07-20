@@ -18,7 +18,7 @@ const pristine = new window.Pristine(form, {
 
 const isValidComment = (comment) => comment.length <= MAX_COMMENTS_LENGTH;
 
-const createHashtag = (value) => value.toLowerCase().trim().split(' ');
+const createHashtag = (value) => value.toLowerCase().trim().split(' ').filter((item) => item);
 
 const isValidHashtag = (value) => {
   if (!value) {

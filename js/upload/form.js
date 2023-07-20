@@ -45,9 +45,9 @@ const openForm = () => {
 
 const onButtonCancelClick = () => closeForm();
 
-const onFileInputChange = () => {
+const onFileInputChange = (event) => {
   openForm();
-  loadImages();
+  loadImages(event);
 };
 
 const onEffectsChange = (event) => changeEffect(event);

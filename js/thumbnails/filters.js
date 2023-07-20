@@ -32,17 +32,13 @@ const setTimeout = debounce((data, id) => {
   initPosts(getFilteringData(data, id));
 }, RENDER_DELAY);
 
-const setDisabledButton = () => {
-  const buttonActive = imagesFiltersForm.querySelector('.img-filters__button--active');
-  buttonActive.classList.remove('img-filters__button--active');
-};
-
 const initFilter = (data) => {
   filter.classList.remove('img-filters--inactive');
   imagesFiltersForm.addEventListener('click', (event) => {
     event.preventDefault();
-    if (event.target.closest('.img-filters__button')) {
-      setDisabledButton();
+
+    if (event.target.closest('.img-filters__button') && !event.target.closest('img-filters__button--active')) {
+      imagesFiltersForm.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
       event.target.classList.add('img-filters__button--active');
       const id = event.target.id;
       setTimeout(data, id);

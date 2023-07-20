@@ -44,6 +44,7 @@ const RANGE_OPTIONS = {
 const imageElement = document.querySelector('.img-upload__preview img');
 const sliderField = document.querySelector('.img-upload__effect-level');
 const effectLevel = document.querySelector('.effect-level__value');
+const rangeElement = document.querySelector('.effect-level__slider');
 
 const setSliderState = (value) => {
   if (value === 'none') {
@@ -56,7 +57,7 @@ const setSliderState = (value) => {
 const createSlider = (value) => {
   setSliderState(value);
   const settings = RANGE_OPTIONS[value] || RANGE_OPTIONS.default;
-  noUiSlider.create(sliderField, {
+  noUiSlider.create(rangeElement, {
     range: {
       min: settings.min,
       max: settings.max,
@@ -70,7 +71,7 @@ const createSlider = (value) => {
 const resetFilter = (value) => {
   imageElement.style.filter = null;
   setSliderState(value);
-  sliderField.classList.add('hidden');
+  rangeElement.classList.add('hidden');
 };
 
 const changeEffect = ({ target }) => {
@@ -82,24 +83,24 @@ const changeEffect = ({ target }) => {
 
   setSliderState(target.value);
 
-  sliderField.classList.remove('hidden');
+  rangeElement.classList.remove('hidden');
 
   const { effect, min, max, step, unit } = RANGE_OPTIONS[target.value];
 
-  sliderField.noUiSlider.updateOptions({
+  rangeElement.noUiSlider.updateOptions({
     range: {
-      min: min,
-      max: max,
+      min,
+      max,
     },
     start: max,
-    step: step,
+    step,
     connect: 'lower',
   });
 
-  sliderField.noUiSlider.off('update');
+  rangeElement.noUiSlider.off('update');
 
-  sliderField.noUiSlider.on('update', () => {
-    effectLevel.value = sliderField.noUiSlider.get();
+  rangeElement.noUiSlider.on('update', () => {
+    effectLevel.value = rangeElement.noUiSlider.get();
     imageElement.style.filter = `${effect}(${effectLevel.value}${unit})`;
   });
 };

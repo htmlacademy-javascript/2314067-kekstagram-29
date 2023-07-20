@@ -4,6 +4,7 @@ import { addValidator, resetPristine, validatePristine } from './validate.js';
 import { activateScale, resetScale } from './scaling.js';
 import { sendData } from '../utils/api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
+import { loadImages } from './load-images.js';
 
 const SEND_URL = 'https://29.javascript.pages.academy/kekstagram';
 const form = document.querySelector('.img-upload__form');
@@ -30,7 +31,7 @@ const onSendErrorMessage = () => {
 
 const onDocumentKeydown = (event) => {
   if (isEscapeKey(event) && !event.target.closest('.text__hashtags') &&
-    !event.target.closest('.text__description')) {
+    !event.target.closest('.text__description') && !document.querySelector('.error')) {
     event.preventDefault();
     closeForm();
   }
@@ -43,7 +44,12 @@ const openForm = () => {
 };
 
 const onButtonCancelClick = () => closeForm();
-const onFileInputChange = () => openForm();
+
+const onFileInputChange = (event) => {
+  openForm();
+  loadImages(event);
+};
+
 const onEffectsChange = (event) => changeEffect(event);
 
 const onFormSubmit = (event) => {
@@ -74,4 +80,4 @@ const initFormAction = () => {
   activateScale();
 };
 
-export { initFormAction };
+export { initFormAction, fileField };

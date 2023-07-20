@@ -31,7 +31,7 @@ const onSendErrorMessage = () => {
 
 const onDocumentKeydown = (event) => {
   if (isEscapeKey(event) && !event.target.closest('.text__hashtags') &&
-    !event.target.closest('.text__description')) {
+    !event.target.closest('.text__description') && !document.querySelector('.error')) {
     event.preventDefault();
     closeForm();
   }
@@ -45,9 +45,9 @@ const openForm = () => {
 
 const onButtonCancelClick = () => closeForm();
 
-const onFileInputChange = () => {
+const onFileInputChange = (event) => {
   openForm();
-  loadImages();
+  loadImages(event);
 };
 
 const onEffectsChange = (event) => changeEffect(event);
@@ -80,4 +80,4 @@ const initFormAction = () => {
   activateScale();
 };
 
-export { initFormAction };
+export { initFormAction, fileField };

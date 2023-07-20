@@ -8,11 +8,13 @@ let successMessageClone;
 const closeErrorMessage = () => {
   errorMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
+  errorMessageClone = '';
 };
 
 const closeSuccessMessage = () => {
   successMessageClone.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
+  successMessageClone = '';
 };
 
 function onDocumentKeydown(event) {
@@ -36,11 +38,24 @@ const onSuccessMessageButtonClick = (event) => {
   closeSuccessMessage();
 };
 
+const onErrorMessageClick = (event) => {
+  if (!event.target.closest('.error__inner')) {
+    closeErrorMessage();
+  }
+};
+
+const onSuccessMessageClick = (event) => {
+  if (!event.target.closest('.success__inner')) {
+    closeSuccessMessage();
+  }
+};
+
 const showErrorMessage = () => {
   errorMessageClone = errorMessageTemplate.cloneNode(true);
   document.body.append(errorMessageClone);
   document.addEventListener('keydown', onDocumentKeydown);
   errorMessageClone.querySelector('.error__button').addEventListener('click', onErrorMessageButtonClick);
+  errorMessageClone.addEventListener('click', onErrorMessageClick);
 };
 
 const showSuccessMessage = () => {
@@ -48,6 +63,7 @@ const showSuccessMessage = () => {
   document.body.append(successMessageClone);
   document.addEventListener('keydown', onDocumentKeydown);
   successMessageClone.querySelector('.success__button').addEventListener('click', onSuccessMessageButtonClick);
+  successMessageClone.addEventListener('click', onSuccessMessageClick);
 };
 
 export { showSuccessMessage, showErrorMessage };

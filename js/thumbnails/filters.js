@@ -1,4 +1,4 @@
-import { initPosts } from './init-posts.js';
+import { renderPosts } from './create-posts.js';
 import { shuffleArray, debounce } from '../utils/util.js';
 
 const FILTER_RANDOM = 'filter-random';
@@ -10,7 +10,7 @@ const filter = document.querySelector('.img-filters');
 const imagesFiltersForm = document.querySelector('.img-filters__form');
 const pictureList = document.querySelector('.pictures');
 
-const getFilteringData = (data, id = '') => {
+const getFilteringData = (data, id) => {
   switch (id) {
     case FILTER_RANDOM:
       return shuffleArray(data.slice()).slice(0, RANDOM_POSTS_COUNT);
@@ -27,9 +27,9 @@ const removePictures = () => {
   pictureList.querySelectorAll('.picture').forEach((picture) => picture.remove());
 };
 
-const setTimeout = debounce((data, id) => {
+const renderDebounce = debounce((data, id) => {
   removePictures();
-  initPosts(getFilteringData(data, id));
+  renderPosts(getFilteringData(data, id));
 }, RENDER_DELAY);
 
 const initFilter = (data) => {
@@ -41,7 +41,7 @@ const initFilter = (data) => {
       imagesFiltersForm.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
       event.target.classList.add('img-filters__button--active');
       const id = event.target.id;
-      setTimeout(data, id);
+      renderDebounce(data, id);
     }
   });
 };

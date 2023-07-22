@@ -13,20 +13,21 @@ const buttonCancel = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
 const imagesUploadSubmit = document.querySelector('.img-upload__submit');
+const currentEffect = effectsField.querySelector('input:checked').value;
 
-function setImagesUploadSubmit(state) {
+const setImagesUploadSubmitState = (state) => {
   imagesUploadSubmit.disabled = state;
-}
+};
 
 const onSendSuccessMessage = () => {
   showSuccessMessage();
   closeForm();
-  setImagesUploadSubmit(false);
+  setImagesUploadSubmitState(false);
 };
 
 const onSendErrorMessage = () => {
   showErrorMessage();
-  setImagesUploadSubmit(false);
+  setImagesUploadSubmitState(false);
 };
 
 const onDocumentKeydown = (event) => {
@@ -55,14 +56,14 @@ const onEffectsChange = (event) => changeEffect(event);
 const onFormSubmit = (event) => {
   event.preventDefault();
   if (validatePristine()) {
-    setImagesUploadSubmit(true);
+    setImagesUploadSubmitState(true);
     sendData(SEND_URL, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
   }
 };
 
 function closeForm() {
   form.reset();
-  resetFilter(effectsField.querySelector('input:checked').value);
+  resetFilter(currentEffect);
   resetPristine();
   resetScale();
   overlay.classList.add('hidden');
@@ -76,8 +77,8 @@ const initFormAction = () => {
   effectsField.addEventListener('change', onEffectsChange);
   form.addEventListener('submit', onFormSubmit);
   addValidator();
-  createSlider(effectsField.querySelector('input:checked').value);
+  createSlider(currentEffect);
   activateScale();
 };
 
-export { initFormAction, fileField };
+export { initFormAction };

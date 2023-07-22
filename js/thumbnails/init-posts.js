@@ -1,21 +1,27 @@
 import { getData } from '../utils/api.js';
-import { showErrorMessage } from '../utils/util.js';
 import { initFilter } from './filters.js';
-import { createPost } from './create-posts.js';
+import { renderPosts } from './create-posts.js';
 
 const GET_URL = 'https://29.javascript.pages.academy/kekstagram/data';
+const ALERT_SHOW_TIME = 5000;
+const ERROR_MESSAGE = 'Ошибка загрузки. Попробовать ещё раз.';
 
-const galleryList = document.querySelector('.pictures');
+const showErrorMessage = () => {
+  const errorContainer = document.createElement('div');
+  errorContainer.classList.add('show-error-message');
+  errorContainer.textContent = ERROR_MESSAGE;
+  document.body.append(errorContainer);
 
-const initPosts = (data) => {
-  data.forEach((item) => galleryList.append(createPost(item)));
+  setTimeout(() => {
+    errorContainer.remove();
+  }, ALERT_SHOW_TIME);
 };
 
 const getSuccess = (data) => {
-  initPosts(data);
+  renderPosts(data);
   initFilter(data);
 };
 
 const initPostsData = () => getData(GET_URL, getSuccess, showErrorMessage);
 
-export { initPostsData, initPosts };
+export { initPostsData };

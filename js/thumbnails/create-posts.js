@@ -2,6 +2,7 @@ import { renderModal } from './modal.js';
 
 const galleryTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const galleryFragment = document.createDocumentFragment();
+const galleryList = document.querySelector('.pictures');
 
 const createPost = (data) => {
   const postElement = galleryTemplate.cloneNode(true);
@@ -19,4 +20,8 @@ const createPost = (data) => {
   return postElement;
 };
 
-export { createPost };
+const renderPosts = (data) => {
+  data.forEach((item) => galleryList.append(createPost(item)));
+};
+
+export { createPost, renderPosts };

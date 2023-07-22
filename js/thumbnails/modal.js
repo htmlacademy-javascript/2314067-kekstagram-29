@@ -15,7 +15,7 @@ const commentList = document.querySelector('.social__comment');
 let showingComments = 0;
 let comments = [];
 
-const fillCommentDescription = () => {
+const fillCommentCounter = () => {
   modalCommentsCounter.innerHTML = `${showingComments} из <span class="comments-count">${comments.length}</span> комментариев`;
 };
 
@@ -40,7 +40,7 @@ const renderComments = () => {
   const currentComments = comments.slice(showingComments, showingComments + COMMENTS_COUNTER);
   showingComments = Math.min(showingComments + COMMENTS_COUNTER, comments.length);
   currentComments.forEach((item) => modalCommentsList.append(createComment(item)));
-  fillCommentDescription();
+  fillCommentCounter();
   setButtonState();
 };
 

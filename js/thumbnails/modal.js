@@ -53,24 +53,24 @@ const fillPicture = (post) => {
 const closeModal = () => {
   document.body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
-  document.removeEventListener('keydown', modalEscKeydownHandler);
-  bigPictureClose.removeEventListener('click', buttonModalCloseClickHandler);
+  document.removeEventListener('keydown', onModalEscKeydown);
+  bigPictureClose.removeEventListener('click', onButtonModalCloseClick);
   showingComments = 0;
 };
 
-const commentsLoadClickHandler = (event) => {
+const onCommentsLoadClick = (event) => {
   event.preventDefault();
   renderComments();
 };
 
-function modalEscKeydownHandler(event) {
+function onModalEscKeydown(event) {
   if (isEscapeKey(event) && !event.target.closest('.social__footer-text')) {
     event.preventDefault();
     closeModal();
   }
 }
 
-function buttonModalCloseClickHandler(event) {
+function onButtonModalCloseClick(event) {
   event.preventDefault();
   closeModal();
 }
@@ -78,9 +78,9 @@ function buttonModalCloseClickHandler(event) {
 const openModal = () => {
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
-  document.addEventListener('keydown', modalEscKeydownHandler);
-  bigPictureClose.addEventListener('click', buttonModalCloseClickHandler);
-  modalCommentsLoader.addEventListener('click', commentsLoadClickHandler);
+  document.addEventListener('keydown', onModalEscKeydown);
+  bigPictureClose.addEventListener('click', onButtonModalCloseClick);
+  modalCommentsLoader.addEventListener('click', onCommentsLoadClick);
 };
 
 const renderModal = (post) => {

@@ -19,13 +19,13 @@ const setImagesUploadSubmitState = (state) => {
   imagesUploadSubmit.disabled = state;
 };
 
-const onSendSuccessMessage = () => {
+const sendSuccessMessageCallback = () => {
   showSuccessMessage();
   closeForm();
   setImagesUploadSubmitState(false);
 };
 
-const onSendErrorMessage = () => {
+const SendErrorMessageCallback = () => {
   showErrorMessage();
   setImagesUploadSubmitState(false);
 };
@@ -57,7 +57,7 @@ const onFormSubmit = (event) => {
   event.preventDefault();
   if (validatePristine()) {
     setImagesUploadSubmitState(true);
-    sendData(SEND_URL, onSendSuccessMessage, onSendErrorMessage, new FormData(event.target));
+    sendData(SEND_URL, sendSuccessMessageCallback, SendErrorMessageCallback, new FormData(event.target));
   }
 };
 

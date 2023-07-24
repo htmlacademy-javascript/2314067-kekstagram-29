@@ -41,10 +41,10 @@ const RANGE_OPTIONS = {
   }
 };
 
-const imageElement = document.querySelector('.img-upload__preview img');
+const imagePreview = document.querySelector('.img-upload__preview img');
 const sliderField = document.querySelector('.img-upload__effect-level');
 const effectLevel = document.querySelector('.effect-level__value');
-const rangeElement = document.querySelector('.effect-level__slider');
+const rangeEffect = document.querySelector('.effect-level__slider');
 
 const setSliderState = (value) => {
   if (value === 'none') {
@@ -57,7 +57,7 @@ const setSliderState = (value) => {
 const createSlider = (value) => {
   setSliderState(value);
   const settings = RANGE_OPTIONS[value] || RANGE_OPTIONS.default;
-  noUiSlider.create(rangeElement, {
+  noUiSlider.create(rangeEffect, {
     range: {
       min: settings.min,
       max: settings.max,
@@ -69,9 +69,9 @@ const createSlider = (value) => {
 };
 
 const resetFilter = (value) => {
-  imageElement.style.filter = null;
+  imagePreview.style.filter = null;
   setSliderState(value);
-  rangeElement.classList.add('hidden');
+  rangeEffect.classList.add('hidden');
 };
 
 const changeEffect = ({ target }) => {
@@ -83,11 +83,11 @@ const changeEffect = ({ target }) => {
 
   setSliderState(target.value);
 
-  rangeElement.classList.remove('hidden');
+  rangeEffect.classList.remove('hidden');
 
   const { effect, min, max, step, unit } = RANGE_OPTIONS[target.value];
 
-  rangeElement.noUiSlider.updateOptions({
+  rangeEffect.noUiSlider.updateOptions({
     range: {
       min,
       max,
@@ -97,11 +97,11 @@ const changeEffect = ({ target }) => {
     connect: 'lower',
   });
 
-  rangeElement.noUiSlider.off('update');
+  rangeEffect.noUiSlider.off('update');
 
-  rangeElement.noUiSlider.on('update', () => {
-    effectLevel.value = rangeElement.noUiSlider.get();
-    imageElement.style.filter = `${effect}(${effectLevel.value}${unit})`;
+  rangeEffect.noUiSlider.on('update', () => {
+    effectLevel.value = rangeEffect.noUiSlider.get();
+    imagePreview.style.filter = `${effect}(${effectLevel.value}${unit})`;
   });
 };
 
